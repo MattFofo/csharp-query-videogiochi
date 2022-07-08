@@ -140,9 +140,20 @@ inner join tournament_videogame on tournaments.id = tournament_videogame.tournam
 inner join videogames on tournament_videogame.videogame_id = videogames.id
 inner join award_videogame on videogames.id = award_videogame.videogame_id
 inner join awards on award_videogame.award_id = awards.id
-where DATEPART(year, videogames.release_date) = 2018 and awards.name = 'Gioco dell''anno';
+where DATEPART(year, videogames.release_date) = 2018
+and awards.name = 'Gioco dell''anno';
 -- 9- Selezionare i giocatori che hanno giocato al gioco più atteso del 2018 in un torneo del 2019 (3306)
--- 
+select players.*
+from tournaments
+inner join tournament_videogame on tournaments.id = tournament_videogame.tournament_id
+inner join videogames on tournament_videogame.videogame_id = videogames.id
+inner join award_videogame on videogames.id = award_videogame.videogame_id
+inner join awards on award_videogame.award_id = awards.id
+inner join player_tournament on tournaments.id = player_tournament.tournament_id
+inner join players on player_tournament.player_id = players.id
+where awards.name = 'Gioco più atteso'
+and DATEPART(year, videogames.release_date) = 2018
+and tournaments.year = 2019;
 -- *********** BONUS ***********
 -- 
 -- 10- Selezionare i dati della prima software house che ha rilasciato un gioco, assieme ai dati del gioco stesso (software house id : 5)
