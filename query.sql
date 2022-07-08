@@ -6,28 +6,51 @@ select *
 from software_houses
 where country = 'United States';
 -- 2- Selezionare tutti i giocatori della città di 'Rogahnland' (2)
--- 
+select *
+from players
+where city = 'Rogahnland';
 -- 3- Selezionare tutti i giocatori il cui nome finisce per "a" (220)
--- 
+select *
+from players
+where name like '%a';
 -- 4- Selezionare tutte le recensioni scritte dal giocatore con ID = 800 (11)
--- 
+select *
+from reviews
+where player_id = 800;
 -- 5- Contare quanti tornei ci sono stati nell'anno 2015 (9)
--- 
+select count(*) as number_of_tournaments_in_2015
+from tournaments
+where year = 2015;
 -- 6- Selezionare tutti i premi che contengono nella descrizione la parola 'facere' (2)
--- 
+select *
+from awards
+where description like '%facere%';
 -- 7- Selezionare tutti i videogame che hanno la categoria 2 (FPS) o 6 (RPG), mostrandoli una sola volta (del videogioco vogliamo solo l'ID) (287)
--- 
+select distinct videogame_id
+from category_videogame
+where category_id = 2 or category_id = 6;
 -- 8- Selezionare tutte le recensioni con voto compreso tra 2 e 4 (2947)
--- 
+select *
+from reviews
+where rating >= 2 and rating <= 4;
 -- 9- Selezionare tutti i dati dei videogiochi rilasciati nell'anno 2020 (46)
--- 
+select name, overview, release_date
+from videogames
+where DATEPART(year, release_date) = 2020;
 -- 10- Selezionare gli id dei videogame che hanno ricevuto almeno una recensione da stelle, mostrandoli una sola volta (443)
--- 
+select distinct videogame_id
+from reviews
+where rating = 5;
 -- *********** BONUS ***********
 -- 
 -- 11- Selezionare il numero e la media delle recensioni per il videogioco con ID = 412 (review number = 12, avg_rating = 3)
--- 
+select count(*) as number_of_reviews, AVG(rating) as average_rating
+from reviews
+where videogame_id = 412;
 -- 12- Selezionare il numero di videogame che la software house con ID = 1 ha rilasciato nel 2018 (13)
+select count(*) as n_videogames
+from videogames
+where DATEPART(year, release_date) = 2018 and software_house_id = 1;
 -- ```
 -- 
 -- ------ Query con group by
